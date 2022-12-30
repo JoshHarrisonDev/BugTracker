@@ -30,13 +30,21 @@ namespace BugTracker.Api.Controllers
             try
             {
                 var createdProject = await _projectService.AddProject(project);
-                return new ResponseModel<Project> { Data = createdProject, StatusCode = System.Net.HttpStatusCode.Created, Message = "Project Created" };
-                
+                return new ResponseModel<Project>
+                {
+                    Data = createdProject,
+                    StatusCode = System.Net.HttpStatusCode.Created,
+                    Message = "Project Created"
+                };
             }
             catch (Exception e)
             {
-                return new ResponseModel<Project> { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = e.Message };
-                throw;
+                return new ResponseModel<Project>
+                {
+                    StatusCode = System.Net.HttpStatusCode.BadRequest,
+                    Message = e.Message
+                };
+
             }
         }
     }
