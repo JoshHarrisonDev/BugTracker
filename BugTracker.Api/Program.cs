@@ -17,6 +17,10 @@ builder.Services.AddDbContext<BugTrackerContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BugTracker")));
 builder.Services.AddScoped<IProjectDataAccess, ProjectDataAccess>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Policy", policy => { policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod(); });
+});
 
 var app = builder.Build();
 
@@ -26,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Policy");
 
 app.UseHttpsRedirection();
 

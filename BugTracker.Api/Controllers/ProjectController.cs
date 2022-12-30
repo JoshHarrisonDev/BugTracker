@@ -22,5 +22,22 @@ namespace BugTracker.Api.Controllers
         {
             return await _projectService.GetAllProjects();
         }
+
+        [HttpPost]
+        [Route("CreateProject")]
+        public async Task<ResponseModel<Project>> CreateProject(Project project)
+        {
+            try
+            {
+                var createdProject = await _projectService.AddProject(project);
+                return new ResponseModel<Project> { Data = createdProject, StatusCode = System.Net.HttpStatusCode.Created, Message = "Project Created" };
+                
+            }
+            catch (Exception e)
+            {
+                return new ResponseModel<Project> { StatusCode = System.Net.HttpStatusCode.BadRequest, Message = e.Message };
+                throw;
+            }
+        }
     }
 }

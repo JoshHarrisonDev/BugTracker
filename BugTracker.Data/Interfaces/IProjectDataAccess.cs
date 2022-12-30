@@ -9,7 +9,7 @@ namespace BugTracker.Data.Interfaces
 {
     public interface IProjectDataAccess
     {
-        Task AddProject(Project project);
+        Task<Project> AddProject(Project project);
 
         Task RemoveProject(int id);
 

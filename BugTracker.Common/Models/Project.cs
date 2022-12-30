@@ -11,6 +11,6 @@ namespace BugTracker.Common.Models
 
         public string Description { get; set; }
 
-        public virtual ICollection<Issue> Issues { get; set; }
+        public virtual ICollection<Issue>? Issues { get; set; }
     }
 }

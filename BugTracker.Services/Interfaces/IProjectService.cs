@@ -4,7 +4,7 @@ namespace BugTracker.Services.Interfaces
 {
     public interface IProjectService
     {
-        Task AddProject(Project project);
+        Task<Project> AddProject(Project project);
 
         Task RemoveProject(int id);
 
