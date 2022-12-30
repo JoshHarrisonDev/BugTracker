@@ -18,10 +18,11 @@ namespace BugTracker.Data.Implementations
             _context = context;
         }
 
-        public async Task AddProject(Project project)
+        public async Task<Project> AddProject(Project project)
         {
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
+            return project;
         }
 
         public async Task<List<Project>> GetAllProjects()

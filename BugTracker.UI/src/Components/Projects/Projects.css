@@ -1,0 +1,47 @@
+.projects-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-navbar {
+  display: flex;
+  width: 100%;
+}
+
+.project-create-dialog-name {
+  padding-top: 5px;
+}
+
+.project-create-dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-create-dialog-content {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  gap: 10px;
+}
+
+.projects-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+  min-width: 300px;
+  min-height: 400px;
+  padding: 1rem;
+align-items: center;
+}
+
+.projects-create-form-buttons{
+    display: flex;
+}
+
+.projects-create-form-name{
+    margin-top: 1.5rem !important;
+}

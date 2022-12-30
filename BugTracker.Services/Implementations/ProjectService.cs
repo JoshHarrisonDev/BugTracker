@@ -18,9 +18,9 @@ namespace BugTracker.Services.Implementations
             _projectDataAccess = projectDataAccess;
         }
 
-        public async Task AddProject(Project project)
+        public async Task<Project> AddProject(Project project)
         {
-            await _projectDataAccess.AddProject(project);
+            return await _projectDataAccess.AddProject(project);
         }
 
         public async Task<List<Project>> GetAllProjects()
