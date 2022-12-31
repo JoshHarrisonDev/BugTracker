@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Skeleton,
   TextField,
   Typography,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import "./Projects.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCreateProject, useGetProjects } from "./projectQueries";
 import { CreateProjectFormValues, Project } from "../../types";
+
 
 type CreateProjectCardProps = {
   handleClose: () => void;
@@ -55,6 +57,7 @@ type ProjectListProps = {
   projects: Project[] | undefined;
 };
 const ProjectList = ({ projects }: ProjectListProps) => {
+ 
   return (
     <div className="project-list">
       {projects &&
@@ -62,11 +65,13 @@ const ProjectList = ({ projects }: ProjectListProps) => {
           return (
             <Card key={index} className="project-item">
               <Typography variant="h5">{project.name}</Typography>
+              <Skeleton variant="circular" width={50} height={50} />
               <CardContent>
                 <Typography variant="body1">{project.description}</Typography>
                 <Typography variant="body1">
                   {project.issues ? `Issues: ${project.issues}` : `Issues: 0`}
                 </Typography>
+                <Button>Delete</Button>
               </CardContent>
             </Card>
           );
@@ -89,7 +94,9 @@ const Projects = ({
 
   return (
     <div className="projects-container">
-      <Typography className="projects-title" variant="h3">Projects</Typography>
+      <Typography className="projects-title" variant="h3">
+        Projects
+      </Typography>
       <div className="projects-main">
         {isCreateProjectOpen && <CreateProjectCard handleClose={handleClose} />}
         {isError

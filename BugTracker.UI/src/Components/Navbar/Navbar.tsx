@@ -41,7 +41,7 @@ const Navbar = ({ handleOpenCreateProject }: Props) => {
             </Link>
           </ListItem>
           <ListItem disablePadding>
-            <Link href="projects">
+            <Link className="navbar-link" href="Projects">
               <ListItemButton>
                 <ListItemIcon>
                   <DraftsIcon />
