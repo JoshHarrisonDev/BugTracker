@@ -3,11 +3,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgb(231, 231, 231) !important;
+  border-radius: 15px;
 }
 
 .projects-navbar {
   display: flex;
   width: 100%;
+  height: 5rem;
+  background-color: rgb(231, 231, 231) !important;
+  border-radius: 15px;
+}
+
+.projects-title{
+    margin: 15px 0px 15px 0px !important;
+}
+
+.projects-navbar-create{
+    height: fit-content !important;
 }
 
 .project-create-dialog-name {
@@ -32,7 +45,7 @@
   flex-direction: column;
   gap: 15px;
   position: relative;
-  min-width: 300px;
+  width:50%;
   min-height: 400px;
   padding: 1rem;
 align-items: center;
@@ -44,4 +57,26 @@ align-items: center;
 
 .projects-create-form-name{
     margin-top: 1.5rem !important;
+}
+
+.project-list{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 10%;
+
+}
+
+.projects-main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.project-item{
+    min-width: 8rem;
+    min-height: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

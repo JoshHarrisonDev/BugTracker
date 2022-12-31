@@ -1,0 +1,10 @@
+.navbar{
+    background-color: rgb(231, 231, 231) !important;
+    border-radius: 15px;
+    overflow-y: hidden;
+    margin: 20px;
+}
+
+.navbar-primary{
+    color:  #1976d2;
+}

@@ -1,4 +1,5 @@
-﻿using BugTracker.Common.Models;
+﻿using Azure;
+using BugTracker.Common.Models;
 using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,21 @@ namespace BugTracker.Api.Controllers
 
         [HttpGet]
         [Route("GetProjects")]
-        public async Task<List<Project>> GetProjects()
+        public async Task<ResponseModel<List<Project>>> GetProjects()
         {
-            return await _projectService.GetAllProjects();
+            try
+            {
+                return new ResponseModel<List<Project>>
+                {
+                    Data = await _projectService.GetAllProjects(),
+                    StatusCode = System.Net.HttpStatusCode.OK
+                }; 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            } 
         }
 
         [HttpPost]

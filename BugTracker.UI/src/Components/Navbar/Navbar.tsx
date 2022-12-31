@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   List,
   ListItem,
@@ -11,17 +12,21 @@ import React from "react";
 import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import Link from "../Link/Link";
-type Props = {};
+import "./Navbar.css";
+import { Route, Routes } from "react-router";
+import AddIcon from "@mui/icons-material/Add";
+type Props = {
+  handleOpenCreateProject: () => void;
+};
 
-const Navbar = (props: Props) => {
+const Navbar = ({ handleOpenCreateProject }: Props) => {
   return (
     <Box
       sx={{
         width: "100%",
         maxWidth: 180,
-        bgcolor: "background.paper",
-        height: "100vh",
       }}
+      className="navbar"
     >
       <nav aria-label="main mailbox folders">
         <List>
@@ -50,8 +55,23 @@ const Navbar = (props: Props) => {
       <Divider />
       <nav aria-label="secondary mailbox folders">
         <List>
+          <Routes>
+            <Route
+              element={
+                <ListItem disablePadding>
+                  <ListItemButton onClick={handleOpenCreateProject}>
+                    <ListItemIcon>
+                      <AddIcon />
+                    </ListItemIcon>
+                    <ListItemText className="navbar-primary" primary="Create" />
+                  </ListItemButton>
+                </ListItem>
+              }
+              path="/projects"
+            />
+          </Routes>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={handleOpenCreateProject}>
               <ListItemText primary="Trash" />
             </ListItemButton>
           </ListItem>
