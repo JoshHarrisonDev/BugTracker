@@ -11,7 +11,7 @@ import React, { useEffect } from "react";
 import "./Projects.css";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateProject, useGetProjects } from "./projectQueries";
+import { useCreateProject, useDeleteProject, useGetProjects } from "./projectQueries";
 import { CreateProjectFormValues, Project } from "../../types";
 
 
@@ -25,9 +25,9 @@ const CreateProjectCard = ({ handleClose }: CreateProjectCardProps) => {
 
   const onSubmit: SubmitHandler<CreateProjectFormValues> = (data) => {
     mutate(data);
-    if (isSuccess) {
+    
       handleClose();
-    }
+    
   };
   return (
     <Card className="projects-create-form">
@@ -58,6 +58,12 @@ type ProjectListProps = {
 };
 const ProjectList = ({ projects }: ProjectListProps) => {
  
+  const {mutate: DeleteProject} = useDeleteProject();
+
+  const handleDelete = (id: number) => {
+    DeleteProject(id);
+  }
+
   return (
     <div className="project-list">
       {projects &&
@@ -71,7 +77,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
                 <Typography variant="body1">
                   {project.issues ? `Issues: ${project.issues}` : `Issues: 0`}
                 </Typography>
-                <Button>Delete</Button>
+                <Button onClick={() => handleDelete(project.id)}>Delete</Button>
               </CardContent>
             </Card>
           );

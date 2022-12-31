@@ -3,6 +3,7 @@ using BugTracker.Common.Models;
 using BugTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace BugTracker.Api.Controllers
 {
@@ -26,7 +27,7 @@ namespace BugTracker.Api.Controllers
                 return new ResponseModel<List<Project>>
                 {
                     Data = await _projectService.GetAllProjects(),
-                    StatusCode = System.Net.HttpStatusCode.OK
+                    StatusCode = HttpStatusCode.OK
                 }; 
             }
             catch (Exception)
@@ -46,7 +47,7 @@ namespace BugTracker.Api.Controllers
                 return new ResponseModel<Project>
                 {
                     Data = createdProject,
-                    StatusCode = System.Net.HttpStatusCode.Created,
+                    StatusCode = HttpStatusCode.Created,
                     Message = "Project Created"
                 };
             }
@@ -54,10 +55,29 @@ namespace BugTracker.Api.Controllers
             {
                 return new ResponseModel<Project>
                 {
-                    StatusCode = System.Net.HttpStatusCode.BadRequest,
+                    StatusCode = HttpStatusCode.BadRequest,
                     Message = e.Message
                 };
 
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteProject/{id}")]
+        public async Task<ResponseModel<int>> DeleteProject(int id)
+        {
+            try
+            {
+                await _projectService.RemoveProject(id);
+                return new ResponseModel<int>
+                {
+                    Data = id,
+                    StatusCode = HttpStatusCode.NoContent,
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
