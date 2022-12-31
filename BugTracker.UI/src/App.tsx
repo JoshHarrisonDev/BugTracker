@@ -3,18 +3,27 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Projects from "./Components/Projects/Projects";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import React from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const [isCreateProjectOpen, setisCreateProjectOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setisCreateProjectOpen(true);
+  };
+
+  const handleClose = () => {
+    setisCreateProjectOpen(false);
+  };
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Router>
-          <Navbar />
+          <Navbar handleOpenCreateProject={handleClickOpen} />
           <div className="main">
             <Routes>
-              <Route element={<Projects />} path="/projects" />
+              <Route element={<Projects handleClickOpen={handleClickOpen} handleClose={handleClose} isCreateProjectOpen={isCreateProjectOpen}/>} path="/projects" />
             </Routes>
           </div>
         </Router>

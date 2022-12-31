@@ -5,7 +5,7 @@ import React, { FC } from "react";
 
 const Link: FC<LinkProps> = props => {
   return (
-    <MuiLink {...props} component={ReactRouterLink} to={props.href ?? "#"} />
+    <MuiLink className="navbar-link" {...props} component={ReactRouterLink} to={props.href ?? "#"} />
   );
 };
 
