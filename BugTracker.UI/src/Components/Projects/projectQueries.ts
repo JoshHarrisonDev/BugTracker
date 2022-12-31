@@ -13,6 +13,11 @@ const postParams = {
   headers: { "Content-Type": "application/json" },
 };
 
+const deleteParams = {
+  method: "DELETE",
+  headers: { "Content-Type": "application/json" },
+};
+
 export const useCreateProject = (
   options?: UseMutationOptions<any, unknown, CreateProjectFormValues, unknown>
 ) => {
@@ -47,3 +52,14 @@ export const useGetProjects = () => {
     return result.json() as Promise<ResponseModel<Project[]>>;
   });
 };
+
+export const useDeleteProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation("delete-project", async (id: number) => {
+    const result = await fetch(`${BASE_URL}Project/DeleteProject/${id}`, {
+      ...deleteParams
+    });
+    queryClient.invalidateQueries("GetProjects");
+    return result.json() as Promise<ResponseModel<number>>;
+  })
+}
