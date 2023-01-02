@@ -17,6 +17,8 @@ builder.Services.AddDbContext<BugTrackerContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BugTracker")));
 builder.Services.AddScoped<IProjectDataAccess, ProjectDataAccess>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IIssueDataAccess, IssueDataAccess>();
+builder.Services.AddScoped<IIssueService, IssueService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Policy", policy => { policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod(); });

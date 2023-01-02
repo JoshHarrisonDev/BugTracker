@@ -4,9 +4,9 @@ import {
   useQuery,
   useQueryClient,
 } from "react-query";
-import { CreateProjectFormValues, Project, ResponseModel } from "../../types";
+import { BASE_URL, CreateProjectFormValues, Project, ResponseModel } from "../../types";
 
-const BASE_URL = "https://localhost:7284/api/";
+
 
 const postParams = {
   method: "POST",
@@ -50,6 +50,13 @@ export const useGetProjects = () => {
   return useQuery("GetProjects", async () => {
     const result = await fetch(`${BASE_URL}Project/GetProjects`);
     return result.json() as Promise<ResponseModel<Project[]>>;
+  });
+};
+
+export const useGetProject = (id: number) => {
+  return useQuery(`GetProject${id}`, async () => {
+    const result = await fetch(`${BASE_URL}Project/GetProject/${id}`);
+    return result.json() as Promise<ResponseModel<Project>>;
   });
 };
 

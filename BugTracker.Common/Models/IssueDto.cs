@@ -1,32 +1,25 @@
 ﻿using BugTracker.Common.Enums;
 using BugTracker.Data.Enums;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BugTracker.Common.Models
 {
-    public class Issue
+    public class IssueDto
     {
-        [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; } = default!;
 
         public string Description { get; set; } = default!;
 
         public IssueStatus Status { get; set; }
 
-        public virtual Project Project { get; set; } = default!;
-
-        public int ProjectId { get; set; }
-
         public IssueType IssueType { get; set; }
-
-
-
-
-
-
     }
 }

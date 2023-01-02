@@ -28,13 +28,13 @@ namespace BugTracker.Api.Controllers
                 {
                     Data = await _projectService.GetAllProjects(),
                     StatusCode = HttpStatusCode.OK
-                }; 
+                };
             }
             catch (Exception)
             {
 
                 throw;
-            } 
+            }
         }
 
         [HttpPost]
@@ -61,6 +61,7 @@ namespace BugTracker.Api.Controllers
 
             }
         }
+
         [HttpDelete]
         [Route("DeleteProject/{id}")]
         public async Task<ResponseModel<int>> DeleteProject(int id)
@@ -79,6 +80,30 @@ namespace BugTracker.Api.Controllers
 
                 throw;
             }
+        }
+
+        [HttpGet]
+        [Route("GetProject/{id}")]
+        public async Task<ResponseModel<Project>> GetProject(int id)
+        {
+            var project = await _projectService.GetProjectById(id);
+            if (project is not null)
+            {
+                return new ResponseModel<Project>
+                {
+                    Data = await _projectService.GetProjectById(id),
+                    StatusCode = HttpStatusCode.OK
+                };
+            }
+            else
+            {
+                return new ResponseModel<Project>
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    Message = $"Project with id:{id} could not be found"
+                };
+            }
+
         }
     }
 }

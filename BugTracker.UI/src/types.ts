@@ -20,13 +20,13 @@ export type Project = {
 export type Issue = {
     id: number;
     name: string;
-    descripion:string;
-    issueStatus: IssueStatus;
+    description:string;
+    status: IssueStatus;
     project: Project;
-    epic?: Issue; 
+    issuseType: IssueType; 
 }
 
-enum IssueStatus {
+export enum IssueStatus {
     NotStarted,
     InProgress,
     AwaitingReview,
@@ -34,3 +34,11 @@ enum IssueStatus {
     Testing,
     Done
 }
+
+export enum IssueType {
+    Bug,
+    Story,
+    Epic
+}
+
+export const BASE_URL = "https://localhost:7284/api/";
