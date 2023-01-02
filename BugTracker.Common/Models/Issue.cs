@@ -19,6 +19,8 @@ namespace BugTracker.Common.Models
 
         public virtual Project Project { get; set; } = default!;
 
+        public int EpicId { get; set; }
+
         public int ProjectId { get; set; }
 
         public IssueType IssueType { get; set; }

@@ -8,5 +8,9 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  padding: 20px;
+  padding: 20px !important;
+  background-color: rgb(231, 231, 231) !important;
+  border-radius: 15px;
+  margin: 20px;
+
 }

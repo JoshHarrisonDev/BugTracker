@@ -84,7 +84,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
               <CardContent>
                 <Typography variant="body1">{project.description}</Typography>
                 <Typography variant="body1">
-                  {project.issues ? `Issues: ${project.issues}` : `Issues: 0`}
+                  {`Issues: ${project.issueCount}`}
                 </Typography>
                 <Button onClick={() => handleDelete(project.id)}>Delete</Button>
               </CardContent>

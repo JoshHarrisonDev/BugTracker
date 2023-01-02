@@ -22,19 +22,12 @@ namespace BugTracker.Api.Controllers
         [Route("GetProjects")]
         public async Task<ResponseModel<List<Project>>> GetProjects()
         {
-            try
+            var projects = await _projectService.GetAllProjects();
+            return new ResponseModel<List<Project>>
             {
-                return new ResponseModel<List<Project>>
-                {
-                    Data = await _projectService.GetAllProjects(),
-                    StatusCode = HttpStatusCode.OK
-                };
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+                Data = projects,
+                StatusCode = HttpStatusCode.OK
+            };
         }
 
         [HttpPost]

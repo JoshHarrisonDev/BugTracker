@@ -10,24 +10,58 @@ const queryClient = new QueryClient();
 
 function App() {
   const [isCreateProjectOpen, setisCreateProjectOpen] = React.useState(false);
-  const handleClickOpen = () => {
+
+  const [isCreateIssueOpen, setisCreateIssueOpen] = React.useState(false);
+
+  const handleCreateProjectOpen = () => {
     setisCreateProjectOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCreateProjectClose = () => {
     setisCreateProjectOpen(false);
+  };
+
+  const handleCreateIssueOpen = () => {
+    setisCreateIssueOpen(true);
+  };
+
+  const handleCreateIssueClose = () => {
+    setisCreateIssueOpen(false);
   };
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Router>
-          <Navbar handleOpenCreateProject={handleClickOpen} />
+          <Navbar
+            handleCloseCreateProject={handleCreateProjectClose}
+            handleOpenCreateProject={handleCreateProjectOpen}
+            handleCreateIssueOpen={handleCreateIssueOpen}
+            handleCreateIssueClose={handleCreateIssueClose}
+          />
           <div className="main">
             <Routes>
-              <Route element={<Projects handleClickOpen={handleClickOpen} handleClose={handleClose} isCreateProjectOpen={isCreateProjectOpen}/>} path="/projects" >
-              </Route>
-              <Route path="projects/:id" element={<Board></Board>} />
-              
+              <Route path="/" element={<div>Home</div>} />
+              <Route
+                element={
+                  <Projects
+                    handleClickOpen={handleCreateProjectOpen}
+                    handleClose={handleCreateProjectClose}
+                    isCreateProjectOpen={isCreateProjectOpen}
+                  />
+                }
+                path="/projects"
+              />
+
+              <Route
+                path="projects/:id"
+                element={
+                  <Board
+                    isCreateIssueOpen={isCreateIssueOpen}
+                    handleCreateIssueOpen={handleCreateIssueOpen}
+                    handleCreateIssueClose={handleCreateIssueClose}
+                  ></Board>
+                }
+              />
             </Routes>
           </div>
         </Router>

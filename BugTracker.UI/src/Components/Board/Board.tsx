@@ -1,11 +1,15 @@
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import { Issue, IssueStatus } from "../../types";
+import { Issue, IssueStatus, IssueType } from "../../types";
 import { useGetProject } from "../Projects/projectQueries";
 import { useGetIssuesForProject } from "./boardQueries";
 import "./Board.css";
-type Props = {};
+type BoardProps = {
+  handleCreateIssueOpen: () => void;
+  handleCreateIssueClose: () => void;
+  isCreateIssueOpen: boolean;
+};
 
 type IssueCardProps = {
   issue: Issue;
@@ -15,9 +19,10 @@ const IssueCard = ({ issue }: IssueCardProps) => {
     console.log(issue);
   });
   return (
-    <Card sx={{ minWidth: "75px" }}>
+    <Card className="issue-card">
       <Typography variant="body1">{issue.name}</Typography>
       <Typography variant="body2">{issue.description}</Typography>
+      <Typography variant="body2">{IssueType[issue.issueType]}</Typography>
     </Card>
   );
 };
@@ -37,7 +42,19 @@ const Column = ({ issues, issueStatus }: ColumnProps) => {
   );
 };
 
-export const Board = ({}: Props) => {
+type CreateIssueProps = {
+  handleCreateIssueClose: () => void;
+}
+const CreateIssue = ({handleCreateIssueClose}:CreateIssueProps) => {
+  return <div>
+    Create
+    <Button onClick={handleCreateIssueClose}>
+      Close
+    </Button>
+  </div>
+}
+
+export const Board = ({isCreateIssueOpen, handleCreateIssueClose, handleCreateIssueOpen}: BoardProps) => {
   let params = useParams();
   const { data: issuesResponse } = useGetIssuesForProject(Number(params["id"]));
   const { data: projectResponse } = useGetProject(Number(params["id"]));
@@ -61,7 +78,7 @@ export const Board = ({}: Props) => {
       <Typography className="board-title" variant="h4">
         Project: {projectResponse?.data?.name}
       </Typography>
-      <div className="board-cols">
+      {!isCreateIssueOpen && <div className="board-cols">
         {issueStatusKeys.map((issueStatus) => {
           return (
             <Column
@@ -72,7 +89,8 @@ export const Board = ({}: Props) => {
             ></Column>
           );
         })}
-      </div>
+      </div>}
+      {isCreateIssueOpen && <CreateIssue handleCreateIssueClose={handleCreateIssueClose} />}
     </div>
   );
 };

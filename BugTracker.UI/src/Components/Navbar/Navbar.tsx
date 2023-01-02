@@ -13,13 +13,21 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import Link from "../Link/Link";
 import "./Navbar.css";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate, useParams } from "react-router";
 import AddIcon from "@mui/icons-material/Add";
 type Props = {
   handleOpenCreateProject: () => void;
+  handleCloseCreateProject: () => void;
+  handleCreateIssueOpen: () => void;
+  handleCreateIssueClose: () => void;
 };
 
-const Navbar = ({ handleOpenCreateProject }: Props) => {
+const Navbar = ({ handleOpenCreateProject, handleCloseCreateProject, handleCreateIssueClose, handleCreateIssueOpen }: Props) => {
+  const navigate = useNavigate();
+
+  const openCreateProject = () => {
+    navigate("/create");
+  };
   return (
     <Box
       sx={{
@@ -31,7 +39,7 @@ const Navbar = ({ handleOpenCreateProject }: Props) => {
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <Link href="Home">
+            <Link href="/">
               <ListItemButton>
                 <ListItemIcon>
                   <InboxIcon />
@@ -41,7 +49,7 @@ const Navbar = ({ handleOpenCreateProject }: Props) => {
             </Link>
           </ListItem>
           <ListItem disablePadding>
-            <Link className="navbar-link" href="Projects">
+            <Link onClick={handleCloseCreateProject} className="navbar-link" href="Projects">
               <ListItemButton>
                 <ListItemIcon>
                   <DraftsIcon />
@@ -69,17 +77,20 @@ const Navbar = ({ handleOpenCreateProject }: Props) => {
               }
               path="/projects"
             />
+            <Route
+              element={
+                <ListItem disablePadding>
+                  <ListItemButton onClick={handleCreateIssueOpen}>
+                    <ListItemIcon>
+                      <AddIcon />
+                    </ListItemIcon>
+                    <ListItemText className="navbar-primary" primary="Create Issue" />
+                  </ListItemButton>
+                </ListItem>
+              }
+              path="/projects/:id"
+            />
           </Routes>
-          <ListItem disablePadding>
-            <ListItemButton onClick={handleOpenCreateProject}>
-              <ListItemText primary="Trash" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemText primary="Spam" />
-            </ListItemButton>
-          </ListItem>
         </List>
       </nav>
     </Box>

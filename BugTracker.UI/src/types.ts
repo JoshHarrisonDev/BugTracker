@@ -13,6 +13,7 @@ export type Project = {
     id: number;
     name: string;
     description: string;
+    issueCount: number;
     issues: Issue[];
 
 }
@@ -23,7 +24,7 @@ export type Issue = {
     description:string;
     status: IssueStatus;
     project: Project;
-    issuseType: IssueType; 
+    issueType: IssueType; 
 }
 
 export enum IssueStatus {

@@ -6,7 +6,10 @@ import {
 } from "react-query";
 import { BASE_URL, CreateProjectFormValues, Project, ResponseModel } from "../../types";
 
-
+const getParams = {
+  method: "GET",
+  headers: { "Content-Type": "application/json" },
+};
 
 const postParams = {
   method: "POST",

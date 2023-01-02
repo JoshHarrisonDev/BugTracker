@@ -27,7 +27,14 @@ namespace BugTracker.Data.Implementations
 
         public async Task<List<Project>> GetAllProjects()
         {
-            return await _context.Projects.ToListAsync();
+            var projects = await _context.Projects.Select(p => new Project
+            {
+                Name = p.Name,
+                Description = p.Description,
+                Id = p.Id,
+                IssueCount = p.Issues.Count()
+            }).ToListAsync();
+            return projects;
         }
 
         public async Task<Project> GetProjectById(int id)
