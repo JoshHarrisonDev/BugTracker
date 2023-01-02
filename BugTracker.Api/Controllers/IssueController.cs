@@ -18,8 +18,8 @@ namespace BugTracker.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetIssuesForProject")]
-        public async Task<ResponseModel<List<IssueDto>>> GetIssuesForProjects(int projectId)
+        [Route("GetIssuesForProject/{projectId}")]
+        public async Task<ResponseModel<List<IssueDto>>> GetIssuesForProject(int projectId)
         {
             return new ResponseModel<List<IssueDto>>
             {

@@ -5,7 +5,7 @@ export const useGetIssuesForProject = (
   id: number
 ) => {
   return useQuery(`GetIssuesForProject${id}`, async () => {
-    const result = await fetch(`${BASE_URL}Issue/GetIssuesForProject/${id}`);
+    const result = await fetch(`${BASE_URL}Issue/GetIssuesForProject/${id}`); 
     return result.json() as Promise<ResponseModel<Issue[]>>;
   });
 };

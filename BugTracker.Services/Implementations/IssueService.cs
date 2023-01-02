@@ -48,7 +48,8 @@ namespace BugTracker.Services.Implementations
                 Id = x.Id,
                 Name = x.Name,
                 Status = x.Status,
-                IssueType = x.IssueType
+                IssueType = x.IssueType,
+
             });
 
             return issuesDto.ToList();

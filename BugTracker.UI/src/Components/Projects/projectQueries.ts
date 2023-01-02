@@ -53,6 +53,13 @@ export const useGetProjects = () => {
   });
 };
 
+export const useGetProject = (id: number) => {
+  return useQuery(`GetProject${id}`, async () => {
+    const result = await fetch(`${BASE_URL}Project/GetProject/${id}`);
+    return result.json() as Promise<ResponseModel<Project>>;
+  });
+};
+
 export const useDeleteProject = () => {
   const queryClient = useQueryClient();
   return useMutation("delete-project", async (id: number) => {
