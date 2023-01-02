@@ -4,9 +4,9 @@ import {
   useQuery,
   useQueryClient,
 } from "react-query";
-import { CreateProjectFormValues, Project, ResponseModel } from "../../types";
+import { BASE_URL, CreateProjectFormValues, Project, ResponseModel } from "../../types";
 
-const BASE_URL = "https://localhost:7284/api/";
+
 
 const postParams = {
   method: "POST",

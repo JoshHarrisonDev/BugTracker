@@ -34,3 +34,5 @@ enum IssueStatus {
     Testing,
     Done
 }
+
+export const BASE_URL = "https://localhost:7284/api/";

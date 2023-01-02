@@ -13,6 +13,7 @@ import "./Projects.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCreateProject, useDeleteProject, useGetProjects } from "./projectQueries";
 import { CreateProjectFormValues, Project } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 
 type CreateProjectCardProps = {
@@ -22,6 +23,7 @@ type CreateProjectCardProps = {
 const CreateProjectCard = ({ handleClose }: CreateProjectCardProps) => {
   const { register, handleSubmit } = useForm<CreateProjectFormValues>();
   const { mutate, isSuccess } = useCreateProject();
+
 
   const onSubmit: SubmitHandler<CreateProjectFormValues> = (data) => {
     mutate(data);
@@ -60,8 +62,15 @@ const ProjectList = ({ projects }: ProjectListProps) => {
  
   const {mutate: DeleteProject} = useDeleteProject();
 
+  const navigate = useNavigate();
+
   const handleDelete = (id: number) => {
     DeleteProject(id);
+  }
+
+  const handleOpenProject = (id:number) => {
+
+    navigate(`/Projects/${id}`)
   }
 
   return (
@@ -70,7 +79,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
         projects.map((project, index) => {
           return (
             <Card key={index} className="project-item">
-              <Typography variant="h5">{project.name}</Typography>
+              <Typography onClick={() => handleOpenProject(project.id)} variant="h5">{project.name}</Typography>
               <Skeleton variant="circular" width={50} height={50} />
               <CardContent>
                 <Typography variant="body1">{project.description}</Typography>
